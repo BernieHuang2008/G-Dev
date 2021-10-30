@@ -124,12 +124,44 @@ struct fraction
 
 
 
+struct angle
+{
+	float deg=0.0;
+	float min=0.0;
+	float sec=0.0;
+	
+	void set(float a,float b,float c)  {deg=a;  min=b;  sec=c;}
+	
+	void turnto(char c)
+	{
+	    if(c=='d') 
+	    {
+	        deg+=min/60+sec/3600;
+	        min=0;sec=0;
+	    }
+	    if(c=='m')
+	    {
+	        min+=deg*60+sec/60;
+	        deg=0;sec=0;
+	    }
+	    if(c=='s')
+	    {
+	        sec+=deg*3600+min*60;
+	        min=0;deg=0;
+	    }
+	    if(c=='n')
+	    {
+	        int temp;
+	        turnto('s');
+	        temp=floor(sec);deg=temp/3600;
+	        temp=floor(sec-3600*deg);min=temp/60;
+	        sec=sec-deg*3600-min*60;
+	    }
+	}
+	
+	
+};
 
-
-
-
-
-struct 
 
 
 #endif 
